@@ -6,8 +6,11 @@ const PORT = process.env.PORT | 3001;
 
 connectdb();
 
+// General configuration:
+app.use(express.json({ extended: false }));
+
 // Routes:
-app.use("/users", require("./routes/users"));
+app.use("/user", require("./routes/user"));
 
 app.get("/", (req, res) => {
   res.status(200).send("API Request");
