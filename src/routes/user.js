@@ -3,6 +3,7 @@ const router = express.Router();
 
 const User = require("../models/User");
 
+// Read all
 router.get("/", async (req, res) => {
   try {
     const users = await User.find({});
@@ -12,6 +13,21 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      res.status(404).send();
+    }
+
+    res.status(200).send(user);
+  } catch (error) {
+    res.status(500).send();
+  }
+});
+
+// Update
 router.post("/", async (req, res) => {
   try {
     const { name, age, email } = req.body;
@@ -33,5 +49,8 @@ router.post("/", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+
+// Delete
+router.delete("/");
 
 module.exports = router;
