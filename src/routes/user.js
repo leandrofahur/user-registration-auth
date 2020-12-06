@@ -3,15 +3,15 @@ const router = express.Router();
 
 const User = require("../models/User");
 
-router.get("/", (req, res) => {
-  res.status(200).send("User route");
+router.get("/:email", (req, res) => {
+  const email = req.params.email;
+  res.status(200).send(email);
 });
 
 router.post("/", async (req, res) => {
   try {
     const { name, age, email } = req.body;
 
-    // CHeck if the user already exist:
     let user = await User.findOne({ email });
     if (!user) {
       user = new User({
