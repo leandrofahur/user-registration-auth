@@ -1,7 +1,10 @@
+const connectdb = require("../config/db");
 const express = require("express");
 const app = express();
 
 const PORT = process.env.PORT | 3001;
+
+connectdb();
 
 app.get("/", (req, res) => {
   res.status(200).send("API Request");
