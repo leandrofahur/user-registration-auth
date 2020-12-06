@@ -3,9 +3,13 @@ const router = express.Router();
 
 const User = require("../models/User");
 
-router.get("/:email", (req, res) => {
-  const email = req.params.email;
-  res.status(200).send(email);
+router.get("/", async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.send(users);
+  } catch (error) {
+    res.status(500).send();
+  }
 });
 
 router.post("/", async (req, res) => {
