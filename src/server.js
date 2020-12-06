@@ -6,6 +6,9 @@ const PORT = process.env.PORT | 3001;
 
 connectdb();
 
+// Routes:
+app.use("/users", require("./routes/users"));
+
 app.get("/", (req, res) => {
   res.status(200).send("API Request");
 });
